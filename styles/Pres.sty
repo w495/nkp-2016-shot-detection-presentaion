@@ -11,6 +11,30 @@
 
 \setbeamertemplate{navigation symbols}{}
 
+\newenvironment{nomargin}{%
+  \begin{list}{}{%
+    \setlength{\topsep}{0pt}%
+    \setlength{\leftmargin}{0pt}%
+    \setlength{\rightmargin}{0pt}%
+    \setlength{\listparindent}{\parindent}%
+    \setlength{\itemindent}{\parindent}%
+    \setlength{\parsep}{\parskip}%
+  }%
+  \item[]}{\end{list}
+}
+
+\newenvironment{imageframe}{%
+    \setbeamercolor{background canvas}{bg=white}%
+    \setbeamertemplate{background}{}%
+    \setbeamertemplate{navigation symbols}{}%
+    \hspace*{-1.4cm}%
+    \begin{frame}[plain,t]%
+}%
+{%
+    \end{frame}%
+}%
+
+
 \newcommand{\imageemptyframew}[1]{
     {
         \setbeamercolor{background canvas}{bg=black}
@@ -25,6 +49,8 @@
          \end{frame}
     }
 }
+
+
 
 \newcommand{\imageemptyframeh}[1]{
     {
@@ -127,6 +153,14 @@
     \end{beamerboxesrounded}
 }
 
+\newcommand{\deeporangebox}[2]{
+    \setbeamercolor{uppercol}{fg=swhite,bg=turquoise}
+    \setbeamercolor{lowercol}{fg=black,bg=pacificcream}
+    \begin{beamerboxesrounded}[upper=uppercol,lower=lowercol]
+        {#1} #2
+    \end{beamerboxesrounded}
+}
+
 
 \newcommand{\greenbox}[2]{
     \setbeamercolor{uppergrn}{fg=swhite,bg=pacificgreen}
@@ -159,3 +193,12 @@
         { #1 }  #2
     \end{beamerboxesrounded}
 }
+
+\newcommand{\violetnbox}[2]{
+    \setbeamercolor{uppergrass}{fg=swhite,bg=deepviolet}
+    \setbeamercolor{lowercol}{fg=black,bg=pacificcream}
+    \begin{beamerboxesrounded}[upper=uppergrass,lower=lowercol]
+        { #1 }  #2
+    \end{beamerboxesrounded}
+}
+

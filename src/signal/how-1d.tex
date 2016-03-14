@@ -1,0 +1,75 @@
+\subsection[1D]{Одномерный случай}
+
+\begin{frame}{Как свести к одномерному случаю}
+
+\begin{small}
+\begin{columns}[t]
+    \begin{column}{0.5\textwidth}
+        \bluebox{Дано: последовательность кадров}{
+            \[
+                F(t) =  F_{rgb,t}
+            \]
+            \[
+            F_{rgb,t} = \left( 
+            \begin{array}{ccc}
+            x_{1,1}, & \cdots & x_{1,m} \\
+            \cdots   & \cdots & \cdots  \\
+            x_{n,1}, & \cdots & x_{n,m} \\
+            \end{array} 
+            \right)_t
+            \]
+            \[
+            x_{i,j} = \left\lbrace 
+                r_{i,j}; g_{i,j}; b_{i,j} 
+            \right\rbrace 
+            \in \mathbb{R}^{3}_{[0,1]};
+            \]
+        }
+        \begin{footnotesize}
+        \greenbox{}{
+                Работаем только с визуальным рядом
+                \begin{itemize}
+                    \item может быть видео без звука;
+                    \item звука без картинки в видео не бывает.
+                \end{itemize}
+        }
+        \end{footnotesize}
+    \end{column}
+    \begin{column}{0.5\textwidth}
+        \orangebox{Для каждого кадра}{
+            Значение по \textit{выбранной} норме
+            \[
+                \left\| F_t \right\|_{L_1} 
+                    = \dfrac{1}{n \cdot m} 
+                        \sum\limits_{i=0}^{n}
+                            \sum\limits_{j=0}^{m}
+                                S(x_{i,j}), \text{где}\quad
+            \]
+            \[
+                S: 
+                    \mathbb{R}^{3}_{[0,1]} 
+                        \longmapsto 
+                            \mathbb{R}_{[0,1]}
+            \]
+        }
+        \begin{footnotesize}
+        \greenbox{}{
+                
+            {\color{grassgreen} 
+                Например, \quad 
+                    $\color{grassgreen} S(x) = Y_{Y'P_rP_b} $
+            }
+        }
+        \orangebox{}{
+            Далее, строим ряд
+            \[
+                F_{L_{1}}(t) = \left\| F_{t} \right\|_{L_1} 
+            \]
+            и пытаемся найти в нем <<аномалии>>.
+        }
+        \end{footnotesize}
+    \end{column}
+\end{columns}
+\end{small}
+
+\end{frame}
