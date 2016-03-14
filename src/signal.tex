@@ -1,0 +1,152 @@
+\section{Зачем искать события ++ }
+
+\begin{frame}{Поиск событий: временные ряды}
+
+\begin{columns}[t]
+  \begin{column}{0.5\textwidth}
+        \bluebox{Изначально имеем }{
+            \scriptsize
+            \begin{itemize}
+                \item последовательность изображений;
+                \item и последовательность аудио-отчетов.
+            \end{itemize}
+        }
+    \end{column}
+    \begin{column}{0.5\textwidth}
+        \orangebox{{Хотим получить}}{
+            \scriptsize
+            \begin{itemize}
+                \item временной ряд;
+                \item описание ситуации в видео.
+            \end{itemize}
+        }
+    \end{column}
+\end{columns}
+\begin{tikzcd}[column sep=1.5pc,ampersand replacement=\&]
+    \raisebox{-.4\height}{
+        \begin{tikzpicture}[scale = 1.6,
+            x={(-0.5cm,-0.04cm)},
+            y={(0.3cm,-0.09cm)},
+            z={(0cm,0.5cm)},]
+        \tikzset{normalframe/.style={
+            fill=black!3,opacity=0.5,draw=black
+        }}
+        \draw[->,>=stealth,thick,black,dashed,line join=round]
+            (1.5,-1,1) -- (1.5,0,1);
+        \begin{scope}[canvas is zx plane at y=0]
+            \path[normalframe] (0,0) rectangle (2,3);
+            \draw[black] (2,0) node [above] {{\footnotesize 
+                последовательность изображений
+            }};
+        \end{scope}
+        \draw[->,>=stealth,thick,black,dashed,line join=round]
+            (1.5,0,1) -- (1.5,1,1);
+        \begin{scope}[canvas is zx plane at y=1]
+            \path[normalframe] (0,0) rectangle (2,3);
+        \end{scope}
+        \draw[->,>=stealth,thick,black,dashed,line join=round]
+            (1.5,1,1) -- (1.5,2,1);
+        \begin{scope}[canvas is zx plane at y=2]
+            \path[normalframe] (0,0) rectangle (2,3);
+        \end{scope}
+        \draw[->,>=stealth,thick,black,dashed,line join=round]
+            (1.5,2,1) -- (1.5,3,1);
+        \begin{scope}[canvas is zx plane at y=3]
+            \path[normalframe] (0,0) rectangle (2,3);
+        \end{scope}
+        \draw[->,>=stealth,thick,black,dashed,line join=round]
+            (1.5,3,1) -- (1.5,4,1);
+        \begin{scope}[canvas is zx plane at y=4]
+            \path[normalframe] (0,0) rectangle (2,3);
+        \end{scope}
+        \draw[->,>=stealth,thick,black,dashed,line join=round]
+            (1.5,4,1) -- (1.5,5,1) node [sloped, below left] {$t$} ;
+        \draw [teal,thick,decorate, decoration={
+            coil,
+            aspect=0,
+            segment length=5,
+            amplitude=2.0,
+        }]  (3.1,-0.5,1) -- (3.1,0,1);
+        \draw [teal,thick,decorate, decoration={
+            coil,
+            aspect=0,
+            segment length=4,
+            amplitude=5.0,
+        }]  (3.1,0,1) -- (3.1,1,1);
+       \draw [teal,thick,decorate, decoration={
+           coil,
+           aspect=0,
+           segment length=3,
+           amplitude=1.0,
+        }]  (3.1,1,1) -- (3.1,2,1);
+       \draw [teal,thick,decorate, decoration={
+           coil,
+           aspect=0,
+           segment length=3,
+           amplitude=4.0,
+        }]  (3.1,2,1) -- (3.1,3,1);
+        \draw [teal,thick,decorate, decoration={
+            coil,
+            aspect=0,
+            segment length=6,
+            amplitude=1.0,
+        }]  (3.1,3,1) -- (3.1,4,1);
+        \draw [teal,thick,decorate, decoration={
+            coil,
+            aspect=0,
+            segment length=6,
+            amplitude=2.0,
+        }]  (3.1,4,1) -- (3.1,5,1);
+        
+        \draw[teal] (3.1,5,1) node [below] {{\small
+            звук
+        }};
+        \end{tikzpicture}
+     }
+    \arrow[thick, rightarrow]{r}{}
+    \&
+    \raisebox{-.6\height}{
+        \includegraphics[height=4cm]
+            {img/video/video-signal.pdf}
+    }
+    \\
+\end{tikzcd}
+\end{frame}
+
+
+
+\begin{frame}{Как превратить во временной ряд}
+
+
+
+\begin{tikzpicture}[
+    scale = 1.0,
+    x={(-0.5cm,-0.04cm)},
+    y={(0.3cm,-0.09cm)},
+    z={(0cm,0.5cm)},
+]
+    \tikzset{normalframe/.style={
+        fill=black!3,
+        opacity=0.5,
+        draw=black
+    }}
+    \begin{scope}[canvas is zx plane at y=0]
+        \path[normalframe] (0,0) rectangle (2,3);
+    \end{scope}
+    \begin{scope}[canvas is zx plane at y=1]
+        \path[normalframe] (0,0) rectangle (2,3);
+    \end{scope}
+    \begin{scope}[canvas is zx plane at y=2]
+        \path[normalframe] (0,0) rectangle (2,3);
+    \end{scope}
+    \begin{scope}[canvas is zx plane at y=3]
+        \path[normalframe] (0,0) rectangle (2,3);
+    \end{scope}
+    \begin{scope}[canvas is zx plane at y=4]
+        \path[normalframe] (0,0) rectangle (2,3);
+    \end{scope}
+\end{tikzpicture}
+
+
+    
+\end{frame}

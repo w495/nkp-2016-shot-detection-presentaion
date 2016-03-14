@@ -1,0 +1,70 @@
+
+\newcommand{\epath}{./img/video/events}
+
+\newcommand{\eventexample}[1]{
+    \includegraphics[width=3.0cm]{\epath/Djadja-Stepa-Milicioner-#1.png}
+}
+
+
+\subsection{События в видео}
+
+
+\begin{frame}{Что такое видео? — Последовательность ...}
+
+
+\graybox{Видео — последовательность фактов или событий}{
+    \begin{itemize}
+        \item События развиваются во времени.
+        \item Свойства событий
+        — {\it пространственная} характеристика видео,
+        \item продолжительность и порядок фактов — {\it временная}.
+    \end{itemize}%
+}
+\vspace{1.5em}
+
+Пример:
+\begin{center}
+    \begin{tikzcd}[column sep=0.02pc,row sep=0.3pc,ampersand replacement=\&]
+        \raisebox{-.4\height}{\eventexample{1}}
+             \raisebox{\height}{$\ ;$}
+        \&
+        \raisebox{-.4\height}{\eventexample{2}}
+             \raisebox{\height}{$\ ;$}
+        \&
+        \raisebox{-.4\height}{\eventexample{3}}
+              \raisebox{\height}{$\ .$}
+        \\
+    \end{tikzcd}
+    \footnotesize
+    \color{zdarkgreen} 
+    (Кадры событий из начала мультфильма <<Дядя Стёпа~—~милиционер>>)
+    
+\end{center}%
+
+\note{
+    sdsd
+    sdsd
+}
+
+
+
+%\graybox{Что есть факты?}{
+%    \begin{itemize}
+%        \item простейший вариант — сцены-съёмки:
+%        \begin{itemize}
+%            \item[$\triangleright$] ищем точки смены съёмок (монтажных склеек).
+%        \end{itemize}
+%        \item пространственная характеристика:
+%        \begin{itemize}
+%            \item[$\triangleright$] начальный и конечный кадр (<<мешок слов>>, GIST)
+%        \end{itemize}
+%        \item временная характеристика:
+%        \begin{itemize}
+%            \item[$\triangleright$] отношения длин съёмок к длинам соседних съёмок
+%            \item[$\triangleright$] $\color{teal}+$ алгоритмы выравнивания последовательностей
+%        \end{itemize}
+%    \end{itemize}
+%}
+
+
+\end{frame}
