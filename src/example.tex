@@ -1,19 +1,45 @@
-\section{Пример}
+\section{Аномалия}
 
+\subsection{Сигнал}
 
 \begin{imageframe}
-    
     \includegraphics[width=\paperwidth]
         {img/video/example/original-signal.pdf}
-    
 \end{imageframe}
 
+\begin{frame}{Что считаем аномалией}
+
+    \graybox{Аномалия}{
+        \begin{itemize}
+            \item резкое изменение свойств наблюдаемого ряда
+            \item в заранее неизвестный момент времени.
+        \end{itemize}
+        Иногда явление называют <<разладкой>>.
+    }
+    \vspace{2em}
+    \orangebox{Как связано с событиями}{
+        \begin{itemize}
+            \item Моменты аномалий — моменты событий.
+            \item В художественном видео:
+            \begin{itemize}
+                \item монтажные склейки;
+                \item собственные события сюжета.
+            \end{itemize}
+        \end{itemize}
+    }
+\end{frame}
+
+\section{Пороги}
+
+\subsection{SAD}
 
 \begin{imageframe}
     \includegraphics[width=\paperwidth]
     {img/video/example/static-treshold-sad.pdf}
 \end{imageframe}
 
+
+\subsection{FFMPEG}
 
 \begin{imageframe}
 
@@ -31,11 +57,14 @@
 \end{imageframe}
 
 
+\begin{frame}{Пороговые методы}
+    
+\graybox{Как устроены}{
+    \begin{itemize}
+        \item Вычисляется разница соседних величин по некоторой норме;
+        \item Все значения, которые превышают порог — считаются <<аномальными>>.
+    \end{itemize}%
+}
 
-
-
-\begin{frame}
-
-1 1 2
 \end{frame}
 
