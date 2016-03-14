@@ -1,0 +1,59 @@
+\subsection[1D]{Одномерный случай}
+
+\begin{frame}{Можно свести к одномерному случаю}
+
+\begin{center}
+\begin{tikzcd}[column sep=1.5pc,row sep=1.0pc,ampersand replacement=\&]
+   \raisebox{-.4\height}{
+        \begin{tikzpicture}[
+        scale = 1.1,
+        x={(-0.5cm,-0.04cm)},
+        y={(0.3cm,-0.09cm)},
+        z={(0cm,0.5cm)},
+        ]
+        \tikzset{normalframe/.style={
+        fill=black!3,
+        opacity=0.5,
+        draw=black
+        }}
+        \begin{scope}[canvas is zx plane at y=0]
+        \path[normalframe] (0,0) rectangle (2,3);
+        \end{scope}
+        \begin{scope}[canvas is zx plane at y=1]
+        \path[normalframe] (0,0) rectangle (2,3);
+        \end{scope}
+        \begin{scope}[canvas is zx plane at y=2]
+        \path[normalframe] (0,0) rectangle (2,3);
+        \end{scope}
+        \begin{scope}[canvas is zx plane at y=3]
+        \path[normalframe] (0,0) rectangle (2,3);
+        \end{scope}
+        \begin{scope}[canvas is zx plane at y=4]
+        \path[normalframe] (0,0) rectangle (2,3);
+        \end{scope}
+        \end{tikzpicture}
+       }
+       \arrow[thick, rightarrow]{r}{}
+       \arrow[very thick, dashed, gray, rightarrow]{d}{}
+       \&
+       \raisebox{-.6\height}{
+           \includegraphics[height=3.5cm]
+           {img/video/feature-classification.pdf}
+       }
+       \arrow[thick, rightarrow]{d}{}
+       \\
+       \raisebox{-.6\height}{
+           \includegraphics[height=3.0cm]
+           {img/video/video-signal-1d.pdf}
+        }
+       \arrow[thick, leftarrow]{r}{}
+       \&
+       \raisebox{-.6\height}{
+           \includegraphics[height=3.0cm]
+           {img/video/video-signal.pdf}
+        }
+       \\
+\end{tikzcd}
+\end{center}
+
+\end{frame}
