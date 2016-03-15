@@ -2,8 +2,10 @@
 
 \subsection{Сигнал}
 
-\begin{imageframe}
-    \includegraphics[width=\paperwidth]
+\begin{imageframe}{
+    <<Дядя Стёпа~—~милиционер>>, внешний вид сигнала $F_{L_{1}}$
+}
+    \includegraphics[width=12cm]
         {img/video/example/original-signal.pdf}
 \end{imageframe}
 
@@ -22,7 +24,7 @@
             \item Моменты аномалий — моменты событий.
             \item В художественном видео:
             \begin{itemize}
-                \item монтажные склейки;
+                \item монтажные склейки или <<сцены>>;
                 \item собственные события сюжета.
             \end{itemize}
         \end{itemize}
@@ -33,27 +35,36 @@
 
 \subsection{SAD}
 
-\begin{imageframe}
-    \includegraphics[width=\paperwidth]
+\begin{imageframe}{
+    <<Дядя Стёпа~—~милиционер>>, простой порог
+ }
+    \includegraphics[width=12cm]
     {img/video/example/static-treshold-sad.pdf}
 \end{imageframe}
 
 
 \subsection{FFMPEG}
 
-\begin{imageframe}
-
-    \includegraphics[width=\paperwidth]
+\begin{imageframe}{
+    <<Дядя Стёпа~—~милиционер>>, определение <<сцен>> в FFMPEG
+}
+    
+    \includegraphics[width=12cm]
     {img/video/example/static-treshold-ffmpeg.pdf}
     
 \end{imageframe}
 
 
-\begin{imageframe}
-    
-\includegraphics[width=\paperwidth]
-{img/video/example/static-treshold-both.pdf}
+\begin{imageframe}{
+    <<Дядя Стёпа~—~милиционер>>, сравнение порогов
+}
+    \includegraphics[width=12cm]
+        {img/video/example/static-treshold-both.pdf}
+\end{imageframe}
 
+\begin{imageframe}{Съёмка с БПЛА над побережьем Тулума (Мексика)}
+    \includegraphics[width=12cm]%
+        {img/video/example/static-treshold-sad-other.pdf}
 \end{imageframe}
 
 
@@ -65,6 +76,40 @@
         \item Все значения, которые превышают порог — считаются <<аномальными>>.
     \end{itemize}%
 }
-
 \end{frame}
+
+
+\begin{imageframe}{
+        <<Дядя Стёпа~—~милиционер>>, \\
+        адаптивный порог 
+        $D_t > \hat{\mu}_{k} + A \cdot \hat{\sigma}_{k}$
+    }
+    \includegraphics[width=11cm]
+    {img/video/example/sigma-treshold-ignore-last.pdf}
+\end{imageframe}
+
+\begin{imageframe}{
+        Съёмка с БПЛА над побережьем Тулума, \\
+        адаптивный порог 
+        $D_t > \hat{\mu}_{k} + A \cdot \hat{\sigma}_{k}$
+    }
+    \includegraphics[width=11cm]
+    {img/video/example/sigma-treshold-ignore-last-other.pdf}
+\end{imageframe}
+
+\begin{imageframe}{
+        <<Дядя Стёпа~—~милиционер>>, \\
+        адаптивный порог
+        $D_t > \hat{\mu}_{k} + A \cdot \hat{\sigma}_{k}$
+    }
+    \includegraphics[width=11cm]
+    {img/video/example/sigma-treshold-ignore-last-big.pdf}
+\end{imageframe}
+
+
+
+
+
+
+
 

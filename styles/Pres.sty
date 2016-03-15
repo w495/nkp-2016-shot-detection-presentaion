@@ -23,16 +23,43 @@
   \item[]}{\end{list}
 }
 
-\newenvironment{imageframe}{%
-    \setbeamercolor{background canvas}{bg=white}%
-    \setbeamertemplate{background}{}%
-    \setbeamertemplate{navigation symbols}{}%
-    \hspace*{-1.4cm}%
-    \begin{frame}[plain,t]%
-}%
-{%
+\usepackage[most]{tcolorbox}
+
+\newtcolorbox{imagesubframe}[1][]{
+    enhanced,%
+    arc=5pt,%
+    colframe=white,%
+    outer arc=0pt,%
+    colback=white,%
+    boxrule=0.1pt,%
+    width=125mm,
+    height=89mm,
+    top=0mm,
+    bottom=0mm,
+    left=0cm,
+    right=0mm,
+    auto outer arc,
+    #1
+}
+
+\usepackage{environ}
+
+\NewEnviron{imageframe}[1]
+{
+    %\setbeamercolor{background canvas}{bg=white}%
+    %\setbeamertemplate{background}{}%
+    %\setbeamertemplate{navigation symbols}{}%
+    \hspace*{-12mm}%
+    \begin{frame}%
+        \begin{imagesubframe}
+        \begin{center}%
+            #1
+            \BODY%
+        \end{center}%
+        \end{imagesubframe}%
     \end{frame}%
-}%
+}
+
 
 
 \newcommand{\imageemptyframew}[1]{
