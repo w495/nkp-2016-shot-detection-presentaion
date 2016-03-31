@@ -6,24 +6,19 @@
 %% в TeXLive или MikTeX или иной,
 %% если она поддерживает последние обновдения CTAN.
 
-\documentclass[utf8,10pt,compress,notes=show,hyperref={xetex}]{beamer}
+\documentclass[utf8,10pt,compress,notes=hide,hyperref={xetex}]{beamer}
 
 \usepackage{styles/init}
 
-\newcommand{\mtitle}{
-    Поиск событий в~видео
-}
+\newcommand{\mtitle}{Поиск событий в~видео}
 
-\newcommand{\mdate}{
-    15 марта 2016 года
-}
+\newcommand{\mdate}{15 марта 2016 года}
 
 \newcommand{\thetitlemod}{
     \ifnum\value{page}>1
         \hspace*{2.5cm}
         \textcolor{zblue}
-            {$\insertframenumber \text{ из }
-            28~(\inserttotalframenumber)$~|~<<\mtitle>>}
+            {$\insertframenumber \text{ из } (\inserttotalframenumber)$~|~<<\mtitle>>}
     \fi
 }
 
@@ -51,22 +46,12 @@
 
 \begin{document}
     \subimport{src/}{titlepage} %% Обложка
+    %\subimport{src/}{about-me}   %% Что это
     \subimport{src/}{toc}       %% Оглавление
     \subimport{src/}{what-is}   %% Что это
     \subimport{src/}{what-for}  %% Зачем это
     \subimport{src/}{signal}    %% Сведение к анализу сигналов
     \subimport{src/}{example}   %% Пример
-    
-
-    
-%    \subimport{src/}{definition}  %% Определение
-%    \subimport{src/}{search}      %% Общая схема поиска
-%    \subimport{src/}{signatures}      %% Общая схема поиска
-
-%    \subimport{src/}{adds}      %% Общая схема поиска
-
-
-
 \end{document}
 
 
