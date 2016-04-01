@@ -13,16 +13,16 @@
             \item размножение оценок:
             \begin{itemize}
                 \item усредненная оценка по~$k$~регрессиям 
-                $S_{DTR,d}(t) = \dfrac{1}{k}\sum\limits_{i=1}^{k} DTR_{i \cdot s,d}(t)$;
+                $S_{d}(t) = \dfrac{1}{k}\sum\limits_{i=1}^{k} DTR_{i \cdot s,d}(t)$;
                 \item окна разного размера $w = i \cdot s$, $s$ — шаг размера окна;
             \end{itemize}
             \item разница соседних точек:
             \begin{itemize}
-                \item $S'_{DTR}(t) = \dfrac{d\,S_{DTR}(t)}{d\,t} = S_{DTR}(t) - S_{DTR}(t-1)$;
+                \item $S'(t) = \dfrac{d\,S(t)}{d\,t} = S(t) - S(t-1)$;
             \end{itemize}
             \item штраф за отклонение:
             \begin{itemize}
-                \item $B_{x}(t) = \left( |S'_{DTR}(t)| > |\hat{\mu}_{x}(S'_{DTR}(t)) + A \cdot \hat{\sigma}_{x}(S'_{DTR}(t))| \right) \in \left\lbrace 0,1 \right\rbrace$, 
+                \item $B_{x}(t) = \left( |S'(t)| > |\hat{\mu}_{x}(S'(t)) + A \cdot \hat{\sigma}_{x}(S'(t))| \right) \in \left\lbrace 0,1 \right\rbrace$, 
                 \item $x$ — размер скользящего окна
             \end{itemize}
             \item еще раз размножение оценок (голосование):
@@ -39,9 +39,8 @@
         <<Дядя Стёпа~—~милиционер>>,
         штрафы по дискретной производной\\
         усредненной кусочно-постоянной аппроксимации
-    }\\
-    $V = \dfrac{1}{k}\sum\limits_{j=1}^{k} Bill\,S_{DTR} =  \dfrac{1}{k}\sum\limits_{j=1}^{k}(|S'_{DTR}| > |\hat{\mu}_{j}(S'_{DTR})+ A \cdot \hat{\sigma}_{j}(S'_{DTR})|)$
-    \includegraphics[width=10cm]
+    }
+    \includegraphics[width=11cm]
     {img/video/example/bill/dtr-stepa-from-00.pdf}
 \end{imageframe}
 
@@ -51,8 +50,7 @@
         штрафы по дискретной производной\\
         усредненной кусочно-постоянной аппроксимации
     }\\
-    $V = \dfrac{1}{k}\sum\limits_{j=1}^{k} Bill\,S_{DTR} =  \dfrac{1}{k}\sum\limits_{j=1}^{k}(|S'_{DTR}| > |\hat{\mu}_{j}(S'_{DTR})+ A \cdot \hat{\sigma}_{j}(S'_{DTR})|)$
-    \includegraphics[width=10cm]
+    \includegraphics[width=11cm]
     {img/video/example/bill/dtr-tulum.pdf}
 \end{imageframe}
 
