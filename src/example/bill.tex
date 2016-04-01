@@ -13,8 +13,8 @@
             \item размножение оценок:
             \begin{itemize}
                 \item усредненная оценка по~$k$~регрессиям 
-                $S_{d}(t) = \dfrac{1}{k}\sum\limits_{i=1}^{k} DTR_{i \cdot s,d}(t)$;
-                \item окна разного размера $w = i \cdot s$, $s$ — шаг размера окна;
+                $S_{d}(t) = \dfrac{1}{k}\sum\limits_{i=1}^{k+1} DTR_{i \cdot y,d}(t)$;
+                \item окна разного размера $w = i \cdot g$, $g$ — шаг размера окна;
             \end{itemize}
             \item разница соседних точек:
             \begin{itemize}
@@ -22,18 +22,43 @@
             \end{itemize}
             \item штраф за отклонение:
             \begin{itemize}
-                \item $B_{x}(t) = \left( |S'(t)| > |\hat{\mu}_{x}(S'(t)) + A \cdot \hat{\sigma}_{x}(S'(t))| \right) \in \left\lbrace 0,1 \right\rbrace$, 
-                \item $x$ — размер скользящего окна
+                \item $B_{w}(t) = \left( |S'(t)| > |\hat{\mu}_{w}(S'(t)) + A \cdot \hat{\sigma}_{w}(S'(t))| \right) \in \left\lbrace 0,1 \right\rbrace$;
             \end{itemize}
             \item еще раз размножение оценок (голосование):
             \begin{itemize}
-                \item $V(t) = \dfrac{1}{n}\sum\limits_{j=1}^{n} B_{j \cdot z}(t)$;\quad $z$ — шаг размера окна;
+                \item $V(t) = \dfrac{1}{n}\sum\limits_{j=1}^{n+1} B_{j \cdot z}(h)$;\quad $h$ — шаг размера окна;
             \end{itemize}
         \end{itemize}%
         
     }
 \end{frame}
 
+\begin{frame}[fragile]{DSL}
+
+Для решения задачи мы разработали мета-язык на базе языка Python.
+
+\begin{lstlisting}[language=Python, escapechar=\%]
+delay = DelayFilter()      # %{\cmnt Фильтр линейной задержки.}%
+original = delay(0)        # %{\cmnt Входящий сигнал без изменения.}%
+shift = ShiftSWFilter()    # %{\cmnt Сдвиг сигнала на один кадр.}%
+diff = original - shift    # %{\cmnt Разница соседних кадров.}%
+norm = NormFilter()        # %{\cmnt Норма сигнала.}%
+modulus = ModulusFilter()  # %{\cmnt Модуль сигнала.}%
+mean = MeanSWFilter()      # %{\cmnt Среднее по скользящему окну.}%
+std = StdSWFilter()        # %{\cmnt Стандартное отклонение по окну.}%
+dtr = DecisionTreeRegressorSWFilter()
+
+n=8, k=8, h=25, g=25, d=2, a=3.0 # %{\cmnt параметры алгоритма}%
+
+S = sum(dtr(w=s*i+1,d=d) for i in range(1,k + 1)) / k
+B = lambda w: delay(0) > (mean(w=w) + a * std(w=w))
+V = sum(B(w=z*j) for j in range(1,n + 1)) / n
+
+# %{\cmnt Фильтр: собирается отложено до непосредсвенного применения.}%
+# %{\cmnt Оператор <<|>> означает <<конвейер>>.}%
+vfilter = norm(l=1) | S | diff | modulus | V
+\end{lstlisting}
+\end{frame}
 
 \begin{imageframe}{
         <<Дядя Стёпа~—~милиционер>>,
