@@ -1,0 +1,77 @@
+
+\begin{frame}{Что предлагаем}
+    
+    \graybox{Штрафы по производной средней оценки}{
+        
+        \begin{itemize}
+            \item оценим сигнал кусочно-постоянной функцией $DTR_{w,d}(t)$:
+            \begin{itemize}
+                \item используем решающее дерево регрессии глубины $d$;
+                \item по скользящему окну размера $w$;
+                
+            \end{itemize}
+            \item размножение оценок:
+            \begin{itemize}
+                \item усредненная оценка по~$k$~регрессиям 
+                $S_{DTR,d}(t) = \dfrac{1}{k}\sum\limits_{i=1}^{k} DTR_{i \cdot s,d}(t)$;
+                \item окна разного размера $w = i \cdot s$, $s$ — шаг размера окна;
+            \end{itemize}
+            \item разница соседних точек:
+            \begin{itemize}
+                \item $S'_{DTR}(t) = \dfrac{d\,S_{DTR}(t)}{d\,t} = S_{DTR}(t) - S_{DTR}(t-1)$;
+            \end{itemize}
+            \item штраф за отклонение:
+            \begin{itemize}
+                \item $B_{x}(t) = \left( |S'_{DTR}(t)| > |\hat{\mu}_{x}(S'_{DTR}(t)) + A \cdot \hat{\sigma}_{x}(S'_{DTR}(t))| \right) \in \left\lbrace 0,1 \right\rbrace$, 
+                \item $x$ — размер скользящего окна
+            \end{itemize}
+            \item еще раз размножение оценок (голосование):
+            \begin{itemize}
+                \item $V(t) = \dfrac{1}{n}\sum\limits_{j=1}^{n} B_{j \cdot z}(t)$;\quad $z$ — шаг размера окна;
+            \end{itemize}
+        \end{itemize}%
+        
+    }
+\end{frame}
+
+
+\begin{imageframe}{
+        <<Дядя Стёпа~—~милиционер>>,
+        штрафы по дискретной производной\\
+        усредненной кусочно-постоянной аппроксимации
+    }\\
+    $V = \dfrac{1}{k}\sum\limits_{j=1}^{k} Bill\,S_{DTR} =  \dfrac{1}{k}\sum\limits_{j=1}^{k}(|S'_{DTR}| > |\hat{\mu}_{j}(S'_{DTR})+ A \cdot \hat{\sigma}_{j}(S'_{DTR})|)$
+    \includegraphics[width=10cm]
+    {img/video/example/dtr-treshold-bills.pdf}
+\end{imageframe}
+
+
+\begin{imageframe}{
+        Съёмка с БПЛА над побережьем Тулума,
+        штрафы по дискретной производной\\
+        усредненной кусочно-постоянной аппроксимации
+    }\\
+    $V = \dfrac{1}{k}\sum\limits_{j=1}^{k} Bill\,S_{DTR} =  \dfrac{1}{k}\sum\limits_{j=1}^{k}(|S'_{DTR}| > |\hat{\mu}_{j}(S'_{DTR})+ A \cdot \hat{\sigma}_{j}(S'_{DTR})|)$
+    \includegraphics[width=10cm]
+    {img/video/example/dtr-treshold-bills-other.pdf}
+\end{imageframe}
+
+
+
+\begin{frame}{Что предлагаем}
+    \orangebox{Плюсы}{
+        \begin{itemize}
+            \item интуитивный поиск аномалий;
+            \item ловит и резкие и плавные переходы;
+            \item относительный порог аномалии 
+            можно выбрать после вычислений (в пределах).
+        \end{itemize}%
+    }
+    \vspace{1em}
+    \bluebox{Минусы}{
+        \begin{itemize}
+            \item требования вычислительным к ресурсам;
+            \item пока плохо изучен, нужно исследовать свойства.
+        \end{itemize}%
+    }
+\end{frame}

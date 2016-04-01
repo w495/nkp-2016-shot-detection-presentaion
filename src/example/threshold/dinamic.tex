@@ -1,0 +1,60 @@
+
+\begin{frame}{Пороговые методы адаптивным порогом}
+    \graybox{Как устроены}{
+        \begin{itemize}
+            \item разница соседних величин (по некоторой норме);
+            \item превышения порога — <<аномалия>>.
+            \item порог вычисляется динамически (критерий Смирного-Граббса).
+        \end{itemize}%
+    }
+    \vspace{0.5em}
+    \orangebox{Плюсы}{
+        \begin{itemize}
+            \item не требовательны к ресурсам.
+        \end{itemize}%
+    }
+    \vspace{0.5em}
+    \bluebox{Минусы}{
+        \begin{itemize}
+            \item требуется заранее подобрать размер скользящего окна;
+            \item не применимо для разных типов видео;
+            \item чувствительны к случайным всплескам;
+            \item ловят только краткосрочные события;
+        \end{itemize}%
+    }
+\end{frame}
+
+
+\subsubsection{Динамичное видео}
+
+\begin{imageframe}{
+        <<Дядя Стёпа~—~милиционер>>, \\
+        адаптивный порог 
+        $D_t > \hat{\mu}_{k} + A \cdot \hat{\sigma}_{k}$
+    }
+    \includegraphics[width=11cm]
+    {img/video/example/sigma-treshold-ignore-last.pdf}
+\end{imageframe}
+
+\begin{imageframe}{
+        <<Дядя Стёпа~—~милиционер>>,
+        адаптивный порог
+        $D_t > \hat{\mu}_{k} + A \cdot \hat{\sigma}_{k}$ \\
+        (не нашли плавный переход)
+    }
+    \includegraphics[width=11cm]
+    {img/video/example/sigma-treshold-ignore-last-big.pdf}
+\end{imageframe}
+
+
+\subsubsection{Спокойное видео}
+
+\begin{imageframe}{
+        Съёмка с БПЛА над побережьем Тулума, \\
+        адаптивный порог 
+        $D_t > \hat{\mu}_{k} + A \cdot \hat{\sigma}_{k}$
+    }
+    \includegraphics[width=11cm]
+    {img/video/example/sigma-treshold-ignore-last-other.pdf}
+\end{imageframe}
+

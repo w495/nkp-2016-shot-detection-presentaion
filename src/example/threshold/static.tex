@@ -1,0 +1,66 @@
+
+\begin{frame}{Пороговые методы cо статическим порогом}
+    
+    \graybox{Как устроены}{
+        \begin{itemize}
+            \item разница соседних величин (по некоторой норме);
+            \item превышения порога — <<аномалия>>.
+        \end{itemize}%
+    }
+    \vspace{0.5em}
+    \orangebox{Плюсы}{
+        \begin{itemize}
+            \item просты в реализации, втч аппаратной;
+            \item не требовательны к ресурсам.
+        \end{itemize}%
+    }
+    \vspace{0.5em}
+    \bluebox{Минусы}{
+        \begin{itemize}
+            \item требуется заранее знать порог;
+            \item не применимо для разных типов видео;
+            \item чувствительны к случайным всплескам;
+            \item ловят только краткосрочные события.
+        \end{itemize}%
+    }
+\end{frame}
+
+\subsubsection{SAD}
+
+\begin{imageframe}{
+    <<Дядя Стёпа~—~милиционер>>, простой порог
+ }
+    \includegraphics[width=12cm]
+    {img/video/example/static-treshold-sad.pdf}
+\end{imageframe}
+
+
+\subsubsection{FFMPEG}
+
+\begin{imageframe}{
+    <<Дядя Стёпа~—~милиционер>>, определение <<сцен>> в FFMPEG
+}
+    
+    \includegraphics[width=12cm]
+    {img/video/example/static-treshold-ffmpeg.pdf}
+    
+\end{imageframe}
+
+
+\subsubsection{Сравнение порогов}
+
+\begin{imageframe}{
+    <<Дядя Стёпа~—~милиционер>>, сравнение порогов
+}
+    \includegraphics[width=12cm]
+        {img/video/example/static-treshold-both.pdf}
+\end{imageframe}
+
+
+\subsubsection{Чем плох статический порог}
+
+\begin{imageframe}{Съёмка с БПЛА над побережьем Тулума (Мексика)}
+    \includegraphics[width=12cm]%
+        {img/video/example/static-treshold-sad-other.pdf}
+\end{imageframe}
+

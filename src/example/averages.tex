@@ -1,0 +1,55 @@
+
+\begin{frame}{Сравнение средних}
+    \graybox{Как устроены}{
+        \begin{itemize}
+            \item разница двух оценок сигнала;
+            \item сигнал оцениваем через средние.
+        \end{itemize}%
+    }
+    \vspace{0.5em}
+    \orangebox{Плюсы}{
+        \begin{itemize}
+            \item не очень требовательны к ресурсам.
+            \item могут ловить и резкие и плавные переходы
+        \end{itemize}%
+    }
+    \vspace{0.5em}
+    \bluebox{Минусы}{
+        \begin{itemize}
+            \item требуется заранее подобрать размеры скользящих окон;
+            \begin{itemize}
+                \item при малом размере ловят шум;
+                \item при большом — могут пропустить событие;
+            \end{itemize}%
+            \item требуется хранить скользящее окно.
+        \end{itemize}%
+    }
+\end{frame}
+
+
+\subsubsection{Динамичное видео}
+
+\begin{imageframe}{
+        <<Дядя Стёпа~—~милиционер>>, разницы средних\\
+    }
+    \includegraphics[width=11cm]
+    {img/video/example/signal-mean-diff.pdf}
+\end{imageframe}
+
+\begin{imageframe}{
+        <<Дядя Стёпа~—~милиционер>>, разницы средних \\
+        (нашли центральную точку перехода)
+    }
+    \includegraphics[width=11cm]
+    {img/video/example/signal-mean-diff-big.pdf}
+\end{imageframe}
+
+
+\subsubsection{Спокойное видео}
+
+\begin{imageframe}{
+        Съёмка с БПЛА над побережьем Тулума, разницы средних \\
+    }
+    \includegraphics[width=11cm]
+    {img/video/example/signal-mean-diff-other.pdf}
+\end{imageframe}
