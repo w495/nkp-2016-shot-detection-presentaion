@@ -13,7 +13,8 @@
 *.pdf
 *.snm
 *.toc
-*.idea
+*.vrb
+*.ideaca
 beamercolorthemetvzavr.sty
 beamerfontthemetvzavr.sty
 beamerouterthemetvzavr.sty
