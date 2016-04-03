@@ -145,14 +145,19 @@ shift = ShiftSWFilter()     # %{\cmnt Сдвиг сигнала на один к
 diff = original - shift     # %{\cmnt Разница соседних кадров.}%
 norm = NormFilter()         # %{\cmnt Норма сигнала.}%
 modulus = ModulusFilter()   # %{\cmnt Модуль сигнала.}%
-swmax = MaxSWFilter(size=200) # %{\cmnt Максимум по окну размера 200}%
-swmin = MinSWFilter(size=200) # %{\cmnt Минимум по окну размера 200}%
+
+# %{\cmnt Возвращает скользящее окно размер 200 для каждого кадра}%
+sw = BaseSWFilter(s=200, min_size=2)
+
+# %{\cmnt Фильтры собирается отложено до непосредсвенного применения.}%
+# %{\cmnt Оператор <<|>> означает <<конвейер>>.}%
+swmax = sw | max           # %{\cmnt Максимум по окну размера 200}%
+swmin = sw | min           # %{\cmnt Минимум по окну размера 200}%
 
 # %{\cmnt Определим фильр масштабирования .}%
 swnorm = (orig - swmin) / (swmax - swmin)
 
-# %{\cmnt Фильтр: собирается отложено до непосредсвенного применения.}%
-# %{\cmnt Оператор <<|>> означает <<конвейер>>.}%
+# %{\cmnt Результирующий фильтр}%
 result_filter = norm(l=1) | diff | modulus | swnorm
 \end{lstlisting}
 \end{frame}
