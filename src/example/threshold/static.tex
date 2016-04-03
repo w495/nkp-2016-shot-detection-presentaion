@@ -1,6 +1,5 @@
 
 \begin{frame}{Пороговые методы cо статическим порогом}
-    
     \graybox{Как устроены}{
         \begin{itemize}
             \item разница соседних величин (по некоторой норме);
@@ -25,7 +24,7 @@
     }
 \end{frame}
 
-\subsubsection{SAD}
+\subsubsection{Разница по модулю}
 
 \begin{imageframe}{
     <<Дядя Стёпа~—~милиционер>>, простой порог
@@ -40,7 +39,6 @@
 \begin{imageframe}{
     <<Дядя Стёпа~—~милиционер>>, определение <<сцен>> в FFMPEG
 }
-    
     \includegraphics[width=12cm]
     {img/video/example/threshold/static/ffmpeg-stepa.pdf}
     
@@ -62,5 +60,109 @@
 \begin{imageframe}{Съёмка с БПЛА над побережьем Тулума (Мексика)}
     \includegraphics[width=12cm]%
         {img/video/example/threshold/static/sad-tulum.pdf}
+\end{imageframe}
+
+\begin{frame}{Чем плох статический порог}
+    
+    \bluebox{Что получилось:}{ 
+        Для определения событий в~Съёмке с~БПЛА над~побережьем Тулума,
+        порога $0.08$ не хватило.
+        \begin{itemize}
+            \item Все разницы кадров оказались меньше порога.
+            \item События найдены не были.
+        \end{itemize}
+    }
+    \vspace{1.5em}
+    \orangebox{В чём проблема:}{
+        \begin{itemize}
+            \item величину порога надо знать заранее;
+            \item нельзя использовать везде одну и ту же величину:
+            \begin{itemize}
+                \item в плавном видео — малые разницы кадров;
+                \item в динамичном видео — большие разницы кадров.
+            \end{itemize}
+        \end{itemize}%
+    }
+\end{frame}
+
+
+\begin{frame}{Улучшения статического порога}
+    \orangebox{Проблема:}{
+        \begin{itemize}
+        \item большой порог для плавного видео:
+            \begin{itemize}
+                \item события найдены не будут;
+            \end{itemize}
+        \item маленький порог для динамичного видео:
+            \begin{itemize}
+                \item много ложных срабатываний;
+            \end{itemize}
+        \item если видео имеет плавные и динамичные участки:
+            \begin{itemize}
+                \item порог подобрать невозможно.
+            \end{itemize}
+        \end{itemize}
+    }
+    \vspace{1.5em}
+    \greenbox{Решение:}{
+        \begin{itemize}
+            \item Учитывать «динамичность» видео:
+            \begin{enumerate}
+                \item Масштабировать разницы кадров:
+                \begin{itemize}
+                    \item нормировать по окрестности.
+                \end{itemize}
+                \item Учитывать среднюю величину и дисперсию.
+            \end{enumerate}
+        \end{itemize}
+    }
+\end{frame}
+
+
+
+\begin{frame}{Масштабировать разницы кадров}
+
+
+\[
+    Norm_{n} = \dfrac
+    {F_{t} - \min \left(  F_{t-n} \dots  F_{t} \right)}
+    {\max \left( F_{t-n} \dots  F_{t} \right)
+        - \min \left( F_{t-n} \dots  F_{t} \right)}
+\]    
+\end{frame}
+
+
+
+\begin{frame}[fragile]{Масштабировать разницы кадров}
+
+
+Для решения задачи мы разработали мета-язык на базе языка Python.
+
+\begin{lstlisting}[language=FilterPython]
+delay = DelayFilter()       # %{\cmnt Фильтр линейной задержки.}%
+orig  = delay(0)            # %{\cmnt Входящий сигнал без изменения.}%
+shift = ShiftSWFilter()     # %{\cmnt Сдвиг сигнала на один кадр.}%
+diff = original - shift     # %{\cmnt Разница соседних кадров.}%
+norm = NormFilter()         # %{\cmnt Норма сигнала.}%
+modulus = ModulusFilter()   # %{\cmnt Модуль сигнала.}%
+swmax = MaxSWFilter(size=200) # %{\cmnt Максимум по окну размера 200}%
+swmin = MinSWFilter(size=200) # %{\cmnt Минимум по окну размера 200}%
+
+# %{\cmnt Определим фильр масштабирования .}%
+swnorm = (orig - swmin) / (swmax - swmin)
+
+# %{\cmnt Фильтр: собирается отложено до непосредсвенного применения.}%
+# %{\cmnt Оператор <<|>> означает <<конвейер>>.}%
+result_filter = norm(l=1) | diff | modulus | swnorm
+\end{lstlisting}
+\end{frame}
+
+
+
+
+
+\begin{imageframe}{Съёмка с БПЛА над побережьем Тулума, 	масштабированный простой порог}
+    \includegraphics[width=12cm]%
+    {img/video/example/threshold/static/sad-swnorm-200-tulum.pdf}
 \end{imageframe}
 

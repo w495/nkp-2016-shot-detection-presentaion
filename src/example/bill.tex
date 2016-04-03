@@ -36,8 +36,7 @@
 \begin{frame}[fragile]{DSL}
 
 Для решения задачи мы разработали мета-язык на базе языка Python.
-
-\begin{lstlisting}[language=Python, escapechar=\%]
+\begin{lstlisting}[language=FilterPython]
 delay = DelayFilter()      # %{\cmnt Фильтр линейной задержки.}%
 original = delay(0)        # %{\cmnt Входящий сигнал без изменения.}%
 shift = ShiftSWFilter()    # %{\cmnt Сдвиг сигнала на один кадр.}%
