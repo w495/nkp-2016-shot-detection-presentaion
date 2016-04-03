@@ -1,0 +1,86 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%
+%%% Опишем новые языки --- ConfigNet и ConfigNetTopo
+%%%
+
+\newcommand{\FilterPythonBasicStyle}
+    {\ttfamily\footnotesize\color{zdarkblue}}
+
+\newcommand{\FilterPythonCommentStyle}
+    {\sffamily\itshape\color{teal}}
+
+\newcommand{\FilterPythonKeywordBasicStyle}
+    {\color{zblue}}
+
+\newcommand{\FilterPythonKeywordBuiltInStyle}
+    {\color{zdarkgreen}}
+
+\newcommand{\FilterPythonKeywordFilterStyle}
+    {\color{violet}}
+
+\newcommand\DigitStyle{\color{deeporange}}
+
+\makeatletter
+\newcommand{\ProcessDigit}[1]
+{%
+  \ifnum\lst@mode=\lst@Pmode\relax%
+   {\DigitStyle #1}%
+  \else
+    #1%
+  \fi
+}
+\makeatother
+
+\newcommand\OperatorStyle{\color{pacificgray}}
+
+\makeatletter
+\newcommand{\ProcessOperator}[1]
+{%
+  \ifnum\lst@mode=\lst@Pmode\relax%
+   {\OperatorStyle #1}%
+  \else
+    #1%
+  \fi
+}
+\makeatother
+
+\newcommand\PipeStyle{\color{orange}}
+\makeatletter
+\newcommand{\ProcessPipe}[1]
+{%
+  \ifnum\lst@mode=\lst@Pmode\relax%
+   {\PipeStyle #1}%
+  \else
+    #1%
+  \fi
+}
+\makeatother
+
+\lstdefinestyle{FilterPythonStyle}{
+    basicstyle=\FilterPythonBasicStyle,
+    commentstyle=\FilterPythonCommentStyle,
+    keywordstyle=[1]\FilterPythonKeywordBasicStyle,
+    keywordstyle=[2]\FilterPythonKeywordBuiltInStyle,
+    keywordstyle=[3]\FilterPythonKeywordFilterStyle,
+    literate=
+        {0}{{{\ProcessDigit{0}}}}1
+        {1}{{{\ProcessDigit{1}}}}1
+        {2}{{{\ProcessDigit{2}}}}1
+        {3}{{{\ProcessDigit{3}}}}1
+        {4}{{{\ProcessDigit{4}}}}1
+        {5}{{{\ProcessDigit{5}}}}1
+        {6}{{{\ProcessDigit{6}}}}1
+        {7}{{{\ProcessDigit{7}}}}1
+        {8}{{{\ProcessDigit{8}}}}1
+        {9}{{{\ProcessDigit{9}}}}1
+        {+}{{{\ProcessOperator{+}}}}1
+        {-}{{{\ProcessOperator{-}}}}1
+        {*}{{{\ProcessOperator{*}}}}1
+        {.}{{{\ProcessDigit{.}}}}1
+        {/}{{{\ProcessOperator{/}}}}1
+        {=}{{{\ProcessOperator{=}}}}1
+        {>}{{{\ProcessOperator{>}}}}1
+        {<}{{{\ProcessOperator{<}}}}1
+        {|}{{{\ProcessPipe{|}}}}1
+        {<=}{{\(\leq\)}}1
+}
