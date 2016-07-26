@@ -33,6 +33,102 @@
     {img/video/example/threshold/static/sad-stepa.pdf}
 \end{imageframe}
 
+\note{
+    \begin{normalsize}
+        В качестве исследуемой величины тут используется 
+        значение нормированной попиксельной 
+        абсолютной разницы яркостей двух соседних кадров.
+        В качестве нормы используется векторная норма $L_1$.
+        \[
+            D_t            
+                = \left\| F_t - F_{t-1} \right\|_{L_1} 
+                    = \dfrac{1}{n \cdot m} 
+                        \sum\limits_{i=0}^{n}
+                        \sum\limits_{j=0}^{m}
+                            \left| x_{t,i,j} - x_{t-1,i,j} \right| 
+        \]
+        \begin{itemize}
+            \item $x_{t,i,j}$ — пиксель кадра $F_t$;
+            \item $x_{t-1,i,j}$ — пиксель кадра $F_{t-1}$;
+        \end{itemize}
+        Физический смысл этой величины 
+        $\left| x_{t,i,j} - x_{t-1,i,j} \right|$
+        заключается в том, насколько один пиксель отличается от другого.
+    \end{normalsize}
+}
+
+\begin{frame}[fragile]{Простой порог: Мета-язык потоковой обработки}
+    \begin{lstlisting}[language=FilterPython]
+    delay = DelayFilter()      # %{\cmnt Фильтр линейной задержки.}%
+    orig  = delay(0)           # %{\cmnt Входящий сигнал без изменения.}%
+    shift = ShiftSWFilter()    # %{\cmnt Сдвиг сигнала на один кадр.}%
+    diff = orig - shift        # %{\cmnt Разница соседних кадров.}%
+    norm = NormFilter()        # %{\cmnt Норма сигнала.}%
+    modulus = ModulusFilter()  # %{\cmnt Модуль сигнала.}%
+    T_CONST = 0.08             # %{\cmnt Значение порога. Константа.}%
+    threshold = orig > T_CONST # %{\cmnt Пороговый фильтр.}%
+    
+    # %{\cmnt Фильтр нормированной попиксельной абсолютной разницы.}%
+    d_filter = diff | modulus | norm(l=1)
+    
+    # %{\cmnt Результирующий фильтр: точки разладок.}%
+    result_filter = d_filter | threshold
+    \end{lstlisting}
+    \begin{itemize}
+        \item Оператор <<|>> означает <<конвейер>>.
+        \item Фильтры собирается отложено 
+                до непосредственного применения.
+    \end{itemize}
+
+\end{frame}
+
+\note{
+    \begin{normalsize}
+        Для решения задачи мы разработали мета-язык 
+        на базе языка Python.\\
+        Свойства мета-языка:
+        \begin{enumerate}
+            \item Основной сущностью является фильтр:
+            \begin{itemize}
+                \item по-факту это просто абстрактный тип 
+                на языке Python с перегруженными операторвами,
+                \item фильтры описывают набор действий 
+                над последовательностью кадров видео;
+            \end{itemize}
+            \item Любые прочие объекты приводятся к фильтру и действия с ними осуществляются как с фильтром;
+            \item Жизненный цикл фильтра состоит из двух этапов:
+            \begin{itemize}
+                \item объявление фильтра — при создании фильтра никаких вычислений над последовательностью кадров не происходит,
+                \item выполнении фильтра —
+                (вызов метода класса $filter\_objects$) 
+                внутри фильтра происходит обработка 
+                последовательности объектов: 
+                кадров или результатов работы других фильтров;
+            \end{itemize}
+        \end{enumerate}
+    \end{normalsize}
+}
+
+\note{
+    \begin{normalsize}
+        Операции над фильтрами:
+        \begin{enumerate}
+            \item Любая операция над фильтрами кроме выполнения,
+            приводит к созданию нового фильтра:
+            \begin{itemize}
+                \item на этапе выполнения фильтра будут вычислены 
+                аргументы этой операции и выполнена сама операция;
+                \item порядок вычисления аргументов операций не определен, и на многоядерных архитектурах аргументы операций могут быть вычисленны параллельно;
+            \end{itemize}
+            \item Основная операция над фильтрами — последовательное их применение — конвейер. Она тоже приводит к созданию нового фильтра.
+            \item Прочие операции над фильтрами приводят 
+            к изменению последовательности объектов или их свойств
+            в процессе выполнения итогового фильтра.
+        \end{enumerate}
+    \end{normalsize}
+}
+
+
 
 \subsubsection{FFMPEG}
 
@@ -43,6 +139,11 @@
     {img/video/example/threshold/static/ffmpeg-stepa.pdf}
     
 \end{imageframe}
+
+\note{
+Обратите внимание, что в случае FFMPEG, 
+в качетсве велич
+}
 
 
 \subsubsection{Сравнение порогов}
@@ -133,40 +234,41 @@
 
 
 
-\begin{frame}[fragile]{Масштабировать разницы кадров}
-
-
-Для решения задачи мы разработали мета-язык на базе языка Python.
-
+\begin{frame}[fragile]{Масштабировать разницы кадров: Мета-язык}
+\begin{footnotesize} 
+Мета-язык на базе языка Python.
+\end{footnotesize}
 \begin{lstlisting}[language=FilterPython]
-delay = DelayFilter()       # %{\cmnt Фильтр линейной задержки.}%
-orig  = delay(0)            # %{\cmnt Входящий сигнал без изменения.}%
-shift = ShiftSWFilter()     # %{\cmnt Сдвиг сигнала на один кадр.}%
-diff = original - shift     # %{\cmnt Разница соседних кадров.}%
-norm = NormFilter()         # %{\cmnt Норма сигнала.}%
-modulus = ModulusFilter()   # %{\cmnt Модуль сигнала.}%
+delay = DelayFilter()      # %{\cmnt Фильтр линейной задержки.}%
+orig  = delay(0)           # %{\cmnt Входящий сигнал без изменения.}%
+shift = ShiftSWFilter()    # %{\cmnt Сдвиг сигнала на один кадр.}%
+diff = orig - shift        # %{\cmnt Разница соседних кадров.}%
+norm = NormFilter()        # %{\cmnt Норма сигнала.}%
+modulus = ModulusFilter()  # %{\cmnt Модуль сигнала.}%
 
 # %{\cmnt Возвращает скользящее окно размер 200 для каждого кадра}%
 sw = BaseSWFilter(s=200, min_size=2)
 
-# %{\cmnt Фильтры собирается отложено до непосредсвенного применения.}%
-# %{\cmnt Оператор <<|>> означает <<конвейер>>.}%
-swmax = sw | max           # %{\cmnt Максимум по окну размера 200}%
-swmin = sw | min           # %{\cmnt Минимум по окну размера 200}%
+swmax = sw | max  # %{\cmnt Максимум по скользящему окну.}%
+swmin = sw | min  # %{\cmnt Минимум по скользящему окну.}%
 
-# %{\cmnt Определим фильр масштабирования .}%
-swnorm = (orig - swmin) / (swmax - swmin)
+swnorm = (orig - swmin) / (swmax - swmin) # %{\cmnt Масштабирование.}%
 
 # %{\cmnt Результирующий фильтр}%
 result_filter = norm(l=1) | diff | modulus | swnorm
 \end{lstlisting}
 \end{frame}
 
+\note{
+Для решения задачи мы разработали мета-язык на базе языка Python.
+Фильтры собирается отложено до непосредственного применения.
+Оператор <<|>> означает <<конвейер>>.
+}
 
-
-
-
-\begin{imageframe}{Съёмка с БПЛА над побережьем Тулума, 	масштабированный простой порог}
+\begin{imageframe}{
+Съёмка с БПЛА над побережьем Тулума,
+масштабированный простой порог
+}
     \includegraphics[width=12cm]%
     {img/video/example/threshold/static/sad-swnorm-200-tulum.pdf}
 \end{imageframe}
