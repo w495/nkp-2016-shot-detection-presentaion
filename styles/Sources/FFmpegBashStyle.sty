@@ -1,0 +1,91 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%
+%%% Опишем новые языки --- ConfigNet и ConfigNetTopo
+%%%
+
+\newcommand{\FFmpegBashStringStyle}
+    {\ttfamily\footnotesize\color{zdarkgreen!80!black}}
+
+\newcommand{\FFmpegBashBasicStyle}
+    {\ttfamily\footnotesize\color{zdarkblue}}
+
+\newcommand{\FFmpegBashCommentStyle}
+    {\sffamily\itshape\color{teal}}
+
+\newcommand{\FFmpegBashKeywordBasicStyle}
+    {\color{zblue}}
+
+\newcommand{\FFmpegBashKeywordBuiltInStyle}
+    {\color{zdarkgreen}}
+
+\newcommand{\FFmpegBashKeywordFilterStyle}
+    {\color{violet}}
+
+\newcommand\FFmpegBashDigitStyle{\color{deeporange}}
+
+\makeatletter
+\newcommand{\FFmpegBashProcessDigit}[1]
+{%
+  \ifnum\lst@mode=\lst@Pmode\relax%
+   {\FFmpegBashDigitStyle #1}%
+  \else
+    #1%
+  \fi
+}
+\makeatother
+
+\newcommand\FFmpegBashOperatorStyle{\color{pacificgray}}
+
+\makeatletter
+\newcommand{\FFmpegBashProcessOperator}[1]
+{%
+  \ifnum\lst@mode=\lst@Pmode\relax%
+   {\FFmpegBashOperatorStyle #1}%
+  \else
+    #1%
+  \fi
+}
+\makeatother
+
+\newcommand\FFmpegBashPipeStyle{\color{orange}}
+\makeatletter
+\newcommand{\FFmpegBashProcessPipe}[1]
+{%
+  \ifnum\lst@mode=\lst@Pmode\relax%
+   {\FFmpegBashPipeStyle #1}%
+  \else
+    #1%
+  \fi
+}
+\makeatother
+
+\lstdefinestyle{FFmpegBashStyle}{
+    basicstyle=\FFmpegBashBasicStyle,
+    commentstyle=\FFmpegBashCommentStyle,
+    keywordstyle=[1]\FFmpegBashKeywordBasicStyle,
+    keywordstyle=[2]\FFmpegBashKeywordBuiltInStyle,
+    keywordstyle=[3]\FFmpegBashKeywordFilterStyle,
+    stringstyle=\FFmpegBashStringStyle,
+    morestring=[b]',
+    literate=
+        {0}{{{\FFmpegBashProcessDigit{0}}}}1
+        {1}{{{\FFmpegBashProcessDigit{1}}}}1
+        {2}{{{\FFmpegBashProcessDigit{2}}}}1
+        {3}{{{\FFmpegBashProcessDigit{3}}}}1
+        {4}{{{\FFmpegBashProcessDigit{4}}}}1
+        {5}{{{\FFmpegBashProcessDigit{5}}}}1
+        {6}{{{\FFmpegBashProcessDigit{6}}}}1
+        {7}{{{\FFmpegBashProcessDigit{7}}}}1
+        {8}{{{\FFmpegBashProcessDigit{8}}}}1
+        {9}{{{\FFmpegBashProcessDigit{9}}}}1
+        {+}{{{\FFmpegBashProcessOperator{+}}}}1
+        {-}{{{\FFmpegBashProcessOperator{-}}}}1
+        {*}{{{\FFmpegBashProcessOperator{*}}}}1
+        {.}{{{\FFmpegBashProcessDigit{.}}}}1
+        {/}{{{\FFmpegBashProcessOperator{/}}}}1
+        {=}{{{\FFmpegBashProcessOperator{=}}}}1
+        {>}{{{\FFmpegBashProcessOperator{>}}}}1
+        {<}{{{\FFmpegBashProcessOperator{<}}}}1
+        {|}{{{\FFmpegBashProcessPipe{|}}}}1
+        {<=}{{\(\leq\)}}1
+}
