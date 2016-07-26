@@ -44,6 +44,15 @@
 
 \usepackage{environ}
 
+
+\newsavebox{\notesbox}
+\newenvironment{noteframe}%
+{\begin{lrbox}{\notesbox}\begin{minipage}{\textwidth}}%
+{\end{minipage}\end{lrbox}\note{\usebox{\notesbox}}}
+
+
+
+
 \NewEnviron{imageframe}[1]
 {
     %\setbeamercolor{background canvas}{bg=white}%
@@ -212,6 +221,15 @@
         {#1}  #2
     \end{beamerboxesrounded}
 }
+
+\newenvironment{mgraybox}[1]%
+{\setbeamercolor{uppergray}{fg=swhite,bg=pacificgray}
+\setbeamercolor{lowercol}{fg=black,bg=pacificcream}
+\begin{beamerboxesrounded}[upper=uppergray,lower=lowercol]{#1}}%
+{\end{beamerboxesrounded}}
+
+
+
 
 \newcommand{\grassgreenbox}[2]{
     \setbeamercolor{uppergrass}{fg=swhite,bg=grassgreen}

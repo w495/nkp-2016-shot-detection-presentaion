@@ -3,6 +3,8 @@
 %%% Опишем новые языки --- ConfigNet и ConfigNetTopo
 %%%
 
+
+
 \newcommand{\FilterPythonBasicStyle}
     {\ttfamily\footnotesize\color{zdarkblue}}
 
@@ -18,38 +20,38 @@
 \newcommand{\FilterPythonKeywordFilterStyle}
     {\color{violet}}
 
-\newcommand\DigitStyle{\color{deeporange}}
+\newcommand\FilterPythonDigitStyle{\color{deeporange}}
 
 \makeatletter
-\newcommand{\ProcessDigit}[1]
+\newcommand{\FilterPythonProcessDigit}[1]
 {%
   \ifnum\lst@mode=\lst@Pmode\relax%
-   {\DigitStyle #1}%
+   {\FilterPythonDigitStyle #1}%
   \else
     #1%
   \fi
 }
 \makeatother
 
-\newcommand\OperatorStyle{\color{pacificgray}}
+\newcommand\FilterPythonOperatorStyle{\color{pacificgray}}
 
 \makeatletter
-\newcommand{\ProcessOperator}[1]
+\newcommand{\FilterPythonProcessOperator}[1]
 {%
   \ifnum\lst@mode=\lst@Pmode\relax%
-   {\OperatorStyle #1}%
+   {\FilterPythonOperatorStyle #1}%
   \else
     #1%
   \fi
 }
 \makeatother
 
-\newcommand\PipeStyle{\color{orange}}
+\newcommand\FilterPythonPipeStyle{\color{orange}}
 \makeatletter
-\newcommand{\ProcessPipe}[1]
+\newcommand{\FilterPythonProcessPipe}[1]
 {%
   \ifnum\lst@mode=\lst@Pmode\relax%
-   {\PipeStyle #1}%
+   {\FilterPythonPipeStyle #1}%
   \else
     #1%
   \fi
@@ -63,24 +65,25 @@
     keywordstyle=[2]\FilterPythonKeywordBuiltInStyle,
     keywordstyle=[3]\FilterPythonKeywordFilterStyle,
     literate=
-        {0}{{{\ProcessDigit{0}}}}1
-        {1}{{{\ProcessDigit{1}}}}1
-        {2}{{{\ProcessDigit{2}}}}1
-        {3}{{{\ProcessDigit{3}}}}1
-        {4}{{{\ProcessDigit{4}}}}1
-        {5}{{{\ProcessDigit{5}}}}1
-        {6}{{{\ProcessDigit{6}}}}1
-        {7}{{{\ProcessDigit{7}}}}1
-        {8}{{{\ProcessDigit{8}}}}1
-        {9}{{{\ProcessDigit{9}}}}1
-        {+}{{{\ProcessOperator{+}}}}1
-        {-}{{{\ProcessOperator{-}}}}1
-        {*}{{{\ProcessOperator{*}}}}1
-        {.}{{{\ProcessDigit{.}}}}1
-        {/}{{{\ProcessOperator{/}}}}1
-        {=}{{{\ProcessOperator{=}}}}1
-        {>}{{{\ProcessOperator{>}}}}1
-        {<}{{{\ProcessOperator{<}}}}1
-        {|}{{{\ProcessPipe{|}}}}1
+        {0}{{{\FilterPythonProcessDigit{0}}}}1
+        {1}{{{\FilterPythonProcessDigit{1}}}}1
+        {2}{{{\FilterPythonProcessDigit{2}}}}1
+        {3}{{{\FilterPythonProcessDigit{3}}}}1
+        {4}{{{\FilterPythonProcessDigit{4}}}}1
+        {5}{{{\FilterPythonProcessDigit{5}}}}1
+        {6}{{{\FilterPythonProcessDigit{6}}}}1
+        {7}{{{\FilterPythonProcessDigit{7}}}}1
+        {8}{{{\FilterPythonProcessDigit{8}}}}1
+        {9}{{{\FilterPythonProcessDigit{9}}}}1
+        {+}{{{\FilterPythonProcessOperator{+}}}}1
+        {-}{{{\FilterPythonProcessOperator{-}}}}1
+        {*}{{{\FilterPythonProcessOperator{*}}}}1
+        {.}{{{\FilterPythonProcessDigit{.}}}}1
+        {/}{{{\FilterPythonProcessOperator{/}}}}1
+        {=}{{{\FilterPythonProcessOperator{=}}}}1
+        {>}{{{\FilterPythonProcessOperator{>}}}}1
+        {<}{{{\FilterPythonProcessOperator{<}}}}1
+        {|}{{{\FilterPythonProcessPipe{|}}}}1
         {<=}{{\(\leq\)}}1
 }
+
